@@ -1,0 +1,12 @@
+{
+    "question": {
+        "methods": ["POST", "GET"],
+        "path": "/question",
+        "description": "Create a new question"
+    },
+    "answer": {
+        "methods": ["POST", "GET"],
+        "path": "/answer",
+        "description": "Verify an answer"
+    }
+}
