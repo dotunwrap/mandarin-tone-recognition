@@ -45,13 +45,3 @@
 >
   {@html displayIcon?.svg}
 </svg>
-
-<style>
-    /* center the icon */
-    svg {
-        margin: auto;
-        display: block;
-        width: 100%;
-        height: 100%;
-    }
-</style>

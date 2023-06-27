@@ -1,9 +1,20 @@
 <script async lang="ts">
     import { assets } from "$app/paths";
     import { page } from "$app/stores";
+    import { theme } from "$lib/stores/theme";
+    import { onMount } from "svelte";
     import Icon from "$lib/components/Icon.svelte";
-    // import Login from "$lib/components/Login.svelte";
-    // import ThemeSwitcher from "$lib/components/ThemeSwitcher.svelte";
+    import { browser } from "$app/environment";
+
+    onMount(() => theme.set("light"));
+    
+    const changeTheme = () => {
+        if (!browser) return;
+        $theme === "light" ? window.document.body.classList.remove("dark-mode") : window.document.body.classList.add("dark-mode");
+        console.log($theme);
+    }
+
+    $: $theme.theme, changeTheme();
 </script>
 
 <nav>
@@ -14,11 +25,16 @@
             <a href="/learn" class="{$page.url.pathname === '/learn' ? 'active' : ''}">Learn</a>
         </div>
     </div>
-    <!-- TODO: Make this section of the nav actually work??? -->
-    <!-- <div>
-        <Login />
-        <ThemeSwitcher />
-    </div> -->
+    <div>
+        <a href="https://github.com/pogriella/mandarin-tone-recognition" target="_blank"><Icon name="github" /></a>
+        <div on:click={() => theme.set($theme === "light" ? "dark" : "light" )}>
+            {#if $theme === "light"}
+                <Icon name="moon" />
+            {:else}
+                <Icon name="sun" />
+            {/if}
+        </div>
+    </div>
 </nav>
 
 <main>
@@ -26,13 +42,13 @@
 </main>
 
 <footer>
-    <div>
+    <div class="footer-column">
     </div>
-    <div>
-        <h3>Made with 🧡 by Gabby</h3>
+    <div class="footer-column">
+        <p>Made with 🧡 by Gabby</p>
     </div>
-    <div class="socials-container">
-        <a href="https://github.com/pogriella/mandarin-helper" target="_blank"><Icon name="github2" /></a>
+    <div class="footer-column">
+       
     </div>
 </footer>
 
@@ -90,10 +106,21 @@
         justify-content: space-between;
         padding: 2rem 2rem;
         background: #f5f5f5;
+        text-align: center;
+    }
+
+    .footer-column {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.25rem;
     }
 
     :global(svg) {
         fill: #000;
+        transition: .2s;
+        cursor: pointer;
+
     }
 
     :global(svg):hover {

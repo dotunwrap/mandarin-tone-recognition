@@ -8,7 +8,7 @@
 </script>
 
 {#if browser}
-    <Icon name="user" color={window.document.body.classList.contains("dark-mode") ? "#f5f5f5" : "#000"} clickable on:click={showDropdown} />
+    <Icon name="user" on:click={showDropdown} />
 {/if}
 
 <div id="login-container" class="hide">
